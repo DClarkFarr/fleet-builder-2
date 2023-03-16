@@ -1,13 +1,17 @@
-import { Express, Router } from "express";
+import { static as staticDir, Express, Router } from "express";
 import { registerRouter } from "../methods/routes";
+import path from "path";
 
 const router = Router();
 
 router.get("*", (req, res) => {
-  res.send("<h1>This is an h1</h1>");
+  res.sendFile(
+    path.join(__dirname, "..", "..", "..", "web", "dist", "index.html")
+  );
 });
 
 const registerWebRoutes = (app: Express) => {
+  app.use(staticDir(path.join(__dirname, "..", "..", "..", "web", "dist")));
   registerRouter(app, router, "/");
 };
 
