@@ -1,3 +1,5 @@
+import { Ability, AbilityLocation } from "./Ability";
+
 export enum Sizes {
   s = "s",
   m = "m",
@@ -32,45 +34,53 @@ export enum ShipClasses {
 
 export type ShipClass = keyof typeof ShipClasses;
 
-export enum WeaponTypes {
+export enum DamageTypes {
   beam = "beam",
   missile = "missile",
   kinetic = "kinetic",
 }
 
-export type WeaponType = keyof typeof WeaponTypes;
+export type DamageType = keyof typeof DamageTypes;
 
-export type HullWeaponSpot = {
-  size: Size;
+export type ShipItem<S extends Size = Size> = {
+  size: S;
+  equipped: string;
 };
 
-export type HullArmorSpot = {
-  size: Size;
-};
-
-export type HullEngineSpot = {
-  size: Size;
-};
-
-export type HullUnitSpot = {
-  size: Size;
+export type HullAbilities = {
+  [K in AbilityLocation]: Ability[];
 };
 
 export type Hull = {
   rarity: ShipRarity;
   class: ShipClass;
 
-  level: number;
+  baseHp: number;
+  baseArmor: number;
+  baseShield: number;
 
-  hp: number;
-  armor: number;
-  shield: number;
+  engineSlot: Size;
+  weaponSlots: Size[];
+  armorSlots: Size[];
+  unitSlots: Size[];
+} & HullAbilities;
 
-  engineSlot: HullEngineSpot;
-  weaponSlots: HullWeaponSpot[];
-  armorSlots: HullArmorSpot[];
-  unitSlots: HullUnitSpot[];
+export interface Ship<H extends Hull> {
+  hull: H;
 
   breakthroughLevel: number;
   chipLevel: number;
-};
+
+  level: number;
+
+  // loop over Hull.weaponSlots and each slot size to ShipItem
+  weapons: {
+    [K in H["weaponSlots"][number]]: ShipItem<K>;
+  };
+  armors: {
+    [K in H["armorSlots"][number]]: ShipItem<K>;
+  };
+  units: {
+    [K in H["unitSlots"][number]]: ShipItem<K>;
+  };
+}

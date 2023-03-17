@@ -1,3 +1,5 @@
+import { DamageType, ShipClass, Size } from "./Ship";
+
 export enum DurationTypes {
   seconds = "seconds",
   attacks = "attacks",
@@ -135,7 +137,52 @@ export enum FormulaItemOperators {
 
 export type FormulaItemOperator = keyof typeof FormulaItemOperators;
 
+export type AbilityNote = {
+  category: AbilityCategory;
+  text: string;
+};
+
+export type AmountFormula = {
+  type: FormulaItemType;
+  value: number | ShipColumn | AmountFormula[];
+};
+
+export type AbilityAmounts = AmountFormula[];
+
+export type AbilityCondition = {
+  type: ConditionType;
+  field: ConditionType extends "id_class" ? ShipClass : never;
+  operator: Operator;
+  value: number;
+};
+
 export type Ability = {
+  location: AbilityLocation;
+
   category: AbilityCategory;
   type: AbilityType;
+
+  variants: string[];
+
+  amounts: AbilityAmounts[];
+  conditions: AbilityCondition[];
+
+  damageType: DamageType;
+
+  sizes: Size[];
+
+  durationType: DurationType;
+  durationValue: number;
+
+  repeatType: RepeatType;
+  repeatValue: number;
+
+  notes: AbilityNote[];
+
+  appliesToFleet: boolean;
+
+  flagshipRequired: boolean;
+
+  boostClasses: ShipClass[];
+  againstClasses: ShipClass[];
 };

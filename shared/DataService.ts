@@ -14,8 +14,9 @@ import {
   AbilityCategory,
   AbilityStance,
   ResistanceTypes,
+  AmountTypes,
 } from "./types/Ability";
-import { Sizes, WeaponTypes } from "./types/Ship";
+import { Sizes, DamageTypes } from "./types/Ship";
 
 export default class DataService {
   // static getFleetLocations() {
@@ -188,15 +189,15 @@ export default class DataService {
     return [
       {
         name: "Beam",
-        slug: WeaponTypes.beam,
+        slug: DamageTypes.beam,
       },
       {
         name: "Missile",
-        slug: WeaponTypes.missile,
+        slug: DamageTypes.missile,
       },
       {
         name: "Kinetic",
-        slug: WeaponTypes.kinetic,
+        slug: DamageTypes.kinetic,
       },
     ];
   }
@@ -359,23 +360,23 @@ export default class DataService {
     return [
       {
         name: "Number",
-        slug: DataService.AMOUNT_TYPES.NUMBER,
+        slug: AmountTypes.number,
       },
       {
         name: "Percent",
-        slug: DataService.AMOUNT_TYPES.PERCENT,
+        slug: AmountTypes.percent,
       },
       {
         name: "Formula",
-        slug: DataService.AMOUNT_TYPES.FORMULA,
+        slug: AmountTypes.formula,
       },
       {
         name: "Seconds",
-        slug: DataService.AMOUNT_TYPES.SECONDS,
+        slug: AmountTypes.seconds,
       },
       {
         name: "Attacks",
-        slug: DataService.AMOUNT_TYPES.ATTACKS,
+        slug: AmountTypes.attacks,
       },
     ];
   }
@@ -393,9 +394,9 @@ export default class DataService {
         ResistanceTypes.armor,
       ],
       [AbilityTypes.increase_resistance]: [
-        WeaponTypes.beam,
-        WeaponTypes.missile,
-        WeaponTypes.kinetic,
+        DamageTypes.beam,
+        DamageTypes.missile,
+        DamageTypes.kinetic,
       ],
       [AbilityTypes.increase_penetration]: [
         ResistanceTypes.shields,
