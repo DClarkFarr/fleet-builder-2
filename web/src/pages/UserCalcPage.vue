@@ -1,3 +1,3 @@
 <template>
-  <h1>Hull Calc</h1>
+    <h1>User Calc</h1>
 </template>

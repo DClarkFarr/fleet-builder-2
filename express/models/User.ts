@@ -7,6 +7,13 @@ export interface IUser {
     alliance: string;
     email: string;
     password?: string;
+
+    boost: {
+        leadership: number;
+        hp: number;
+        shield: number;
+        armor: number;
+    };
 }
 
 interface IUserMethods {
@@ -48,6 +55,24 @@ const UserSchema = new Schema<IUser, IUserModel, IUserMethods>({
         required: true,
         hide: true,
         set: (password: string) => bcrypt.hashSync(password, 10),
+    },
+    boost: {
+        leadership: {
+            type: Number,
+            default: 0,
+        },
+        hp: {
+            type: Number,
+            default: 0,
+        },
+        shield: {
+            type: Number,
+            default: 0,
+        },
+        armor: {
+            type: Number,
+            default: 0,
+        },
     },
 });
 

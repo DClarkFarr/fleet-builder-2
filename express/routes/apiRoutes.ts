@@ -37,8 +37,17 @@ router.post("/auth/login", async (req, res, next) => {
             name: body.name || body.email.split("@")[0],
             email: body.email,
             password: body.password,
+            boost: {
+                leadership: 0,
+                hp: 0,
+                shield: 0,
+                armor: 0,
+            },
         });
-        await user.save();
+
+        await user.save({
+            validateBeforeSave: true,
+        });
     } else {
         if (!(await user.authenticate(body.password))) {
             return next(new ApiError("Invalid password", 401));
