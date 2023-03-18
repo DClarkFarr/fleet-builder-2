@@ -7,7 +7,7 @@ export interface IUser {
     alliance: string;
     email: string;
     password?: string;
-
+    admiralLevel: number;
     boost: {
         leadership: number;
         hp: number;
@@ -35,6 +35,10 @@ const UserSchema = new Schema<IUser, IUserModel, IUserMethods>({
     alliance: {
         type: String,
         default: "AVN",
+    },
+    admiralLevel: {
+        type: Number,
+        default: 1,
     },
     email: {
         type: String,

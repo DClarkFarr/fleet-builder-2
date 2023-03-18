@@ -37,6 +37,7 @@ router.post("/auth/login", async (req, res, next) => {
             name: body.name || body.email.split("@")[0],
             email: body.email,
             password: body.password,
+            admiralLevel: 1,
             boost: {
                 leadership: 0,
                 hp: 0,
@@ -59,8 +60,6 @@ router.post("/auth/login", async (req, res, next) => {
     req.session.save((err) => {
         console.log("session saved", err);
     });
-
-    console.log("got user", user);
 
     res.json({
         user: user.toJSON(),

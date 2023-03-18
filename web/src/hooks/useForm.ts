@@ -19,7 +19,9 @@ export const getDOMNode = (value: FieldNode) => {
     return value.$el as HTMLElement;
 };
 
-export type UseFormMethods<T extends Record<string, string>> = {
+export type UseFormMethods<
+    T extends Record<string, string | number | boolean>
+> = {
     setDisabled: (bool: boolean) => void;
     setIsSubmitting: (bool: boolean) => void;
     setValue: (name: keyof T, value: T[keyof T]) => void;
@@ -32,13 +34,13 @@ export type UseFormMethods<T extends Record<string, string>> = {
     clearMessage: () => void;
 };
 
-const useForm = <T extends Record<string, string>>(props: {
+const useForm = <T extends Record<string, string | number | boolean>>(props: {
     initialValues: T;
 }) => {
     type Key = keyof T;
 
     type FieldProps = {
-        validate: (value: T[Key]) => string | Promise<string>;
+        validate?: (value: T[Key]) => string | Promise<string>;
     };
 
     const makeFormErrors = () => {
@@ -179,7 +181,7 @@ const useForm = <T extends Record<string, string>>(props: {
         clearMessage();
     };
 
-    const useField = (name: Key, fieldProps: FieldProps) => {
+    const useField = (name: Key, fieldProps: FieldProps = {}) => {
         const fieldRef = ref<FieldNode | null>(null);
 
         if (fieldProps.validate) {
