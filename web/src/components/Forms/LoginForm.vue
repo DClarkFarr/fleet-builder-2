@@ -70,6 +70,20 @@ const onSubmit = async () => {
                 type="password"
                 :input="password"
             />
+
+            <slot name="message">
+                <div
+                    class="px-4 py-3 leading-none text-center text-white mb-4"
+                    :class="{
+                        'bg-red-500': form.message.type === 'error',
+                        'bg-green-500': form.message.type === 'success',
+                    }"
+                    v-if="form.message.text.length"
+                >
+                    {{ form.message.text }}
+                </div>
+            </slot>
+
             <button
                 type="submit"
                 class="btn btn-sky"

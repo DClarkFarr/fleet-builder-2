@@ -135,6 +135,7 @@ const useForm = <T extends Record<string, string>>(props: {
     const submit = async (
         fn: (values: T, methods: UseFormMethods<T>) => Promise<void>
     ) => {
+        clearMessage();
         await validate();
 
         if (!isInvalid.value) {
