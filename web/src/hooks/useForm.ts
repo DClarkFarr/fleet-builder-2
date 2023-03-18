@@ -227,7 +227,6 @@ const useForm = <T extends Record<string, string | number | boolean>>(props: {
 
     const isInvalid = computed(() => {
         var val = Object.keys(formErrors).some((key) => !!get(formErrors, key));
-        console.log("calculating form invalid", val);
 
         return val;
     });
