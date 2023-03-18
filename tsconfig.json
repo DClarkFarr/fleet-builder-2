@@ -1,8 +1,9 @@
 {
-  "compilerOptions": {
-    "paths": {
-      "@/shared/*": ["../shared/*"]
-    },
-    "rootDirs": ["./web", "../shared", "./express"]
-  }
+    "compilerOptions": {
+        "baseUrl": ".",
+        "paths": {
+            "@/shared/*": ["./shared/*"]
+        },
+        "rootDirs": ["./web", "./shared", "./express"]
+    }
 }
