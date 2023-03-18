@@ -1,13 +1,16 @@
 <script lang="ts" setup>
 import LoginForm, { LoginFormState } from "@/components/Forms/LoginForm.vue";
 import { UseFormMethods } from "@/hooks/useForm";
-import AuthService from "@/services/AuthService";
+import useUserStore from "@/stores/useUserStore";
+
+const user = useUserStore();
 
 const onSubmitForm = async (
     formValues: LoginFormState,
     methods: UseFormMethods<LoginFormState>
 ) => {
-    return AuthService.login(formValues)
+    return user
+        .login(formValues)
         .then(() => {
             console.log("success!");
             methods.reset();

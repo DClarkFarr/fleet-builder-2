@@ -1,3 +1,4 @@
+import { User } from "@/types/User";
 import { AxiosError, AxiosResponse } from "axios";
 import apiClient from "./apiClient";
 
@@ -32,8 +33,12 @@ const handleAxiosRequest = <T>(request: Promise<AxiosResponse<T>>) => {
 class AuthService {
     static login(credentials: AuthServiceLoginCredentials) {
         return handleAxiosRequest(
-            apiClient.post<{ user: object }>("/auth/login", credentials)
+            apiClient.post<{ user: User }>("/auth/login", credentials)
         );
+    }
+
+    static me() {
+        return handleAxiosRequest(apiClient.get<{ user: User }>("/auth/me"));
     }
 }
 

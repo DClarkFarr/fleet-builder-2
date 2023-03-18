@@ -14,9 +14,9 @@ interface IUserMethods {
     getPasswordHash(): Promise<string | undefined>;
 }
 
-interface IUserDocument extends HydratedDocument<IUser, IUserMethods> {}
+export interface IUserDocument extends HydratedDocument<IUser, IUserMethods> {}
 
-interface IUserModel extends Model<IUser, {}, IUserMethods> {
+export interface IUserModel extends Model<IUser, {}, IUserMethods> {
     findByEmail(email: string): Promise<IUserDocument | null>;
 }
 

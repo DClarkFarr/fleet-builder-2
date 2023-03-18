@@ -45,6 +45,33 @@ router.post("/auth/login", async (req, res, next) => {
         }
     }
 
+    req.session.user = user;
+
+    req.session.save((err) => {
+        console.log("session saved", err);
+    });
+
+    console.log("got user", user);
+
+    res.json({
+        user: user.toJSON(),
+    });
+});
+
+router.get("/auth/me", async (req, res) => {
+    if (!req.session.user) {
+        return res.status(404).json({ message: "User not logged in" });
+    }
+
+    const user = await User.findByEmail(req.session.user.email);
+
+    if (!user) {
+        req.session.destroy((err) => {
+            console.log("session destroyed", err);
+        });
+        return res.status(400).json({ message: "Session resetting" });
+    }
+
     res.json({
         user: user.toJSON(),
     });

@@ -1,7 +1,13 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import useUserStore from "@/stores/useUserStore";
+
+const user = useUserStore();
+
+user.refresh();
+</script>
 
 <template>
-  <RouterView />
+    <RouterView />
 </template>
 
 <style scoped></style>
