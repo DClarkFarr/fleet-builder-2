@@ -1,49 +1,82 @@
 <script lang="ts" setup>
-import { reactive } from "vue";
-import { useForm } from "vue-hooks-form";
-import Schema from "async-validator";
 import BasicInput from "@/components/Controls/BasicInput.vue";
+import useForm, { UseFormMethods } from "@/hooks/useForm";
+import validator from "validator";
+
+export type LoginFormState = {
+    email: string;
+    password: string;
+};
 
 const props = defineProps<{
-  onSubmit: (values: any) => Promise<void>;
+    onSubmit: (
+        values: LoginFormState,
+        methods: UseFormMethods<{ email: string; password: string }>
+    ) => Promise<void>;
 }>();
 
 const form = useForm({
-  defaultValues: {
-    email: "",
-    password: "",
-  },
+    initialValues: {
+        email: "",
+        password: "",
+    },
 });
 
 const email = form.useField("email", {
-  rule: {
-    required: true,
-    type: "email",
-  },
+    validate: (value: string) => {
+        if (!value) {
+            return "Email is required";
+        }
+        if (!validator.isEmail(value)) {
+            return "Email is invalid";
+        }
+
+        return "";
+    },
 });
 
 const password = form.useField("password", {
-  rule: {
-    required: true,
-    type: "string",
-    min: 5,
-  },
+    validate: (value: string) => {
+        if (!value) {
+            return "Password is required";
+        }
+        if (value.length < 6) {
+            return "Password must be at least 6 characters";
+        }
+
+        return "";
+    },
 });
 
 const onSubmit = async () => {
-  return form.handleSubmit(props.onSubmit);
+    console.log("calling handle submit");
+    return form.submit(props.onSubmit);
 };
 </script>
 
 <template>
-  <form @submit.prevent="onSubmit">
-    <BasicInput :input="email" label="Email" placeholder="Enter your email" />
-    <BasicInput
-      :input="password"
-      label="Password"
-      placeholder="Enter your password"
-      type="password"
-    />
-    <button type="submit" class="btn btn--primary">Login</button>
-  </form>
+    <div class="p-4 max-w-[450px]">
+        <form @submit.prevent="onSubmit">
+            <BasicInput
+                name="name"
+                label="Email"
+                placeholder="Enter your email"
+                :input="email"
+            />
+            <BasicInput
+                name="password"
+                label="Password"
+                placeholder="Enter your password"
+                type="password"
+                :input="password"
+            />
+            <button
+                type="submit"
+                class="btn btn-sky"
+                :disabled="form.isSubmitting || form.isInvalid"
+            >
+                {{ form.isSubmitting ? "Loading..." : "Login" }}
+            </button>
+        </form>
+    </div>
 </template>

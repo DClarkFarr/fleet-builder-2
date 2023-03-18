@@ -1,82 +1,70 @@
 <script lang="ts" setup>
-import useHasSlot from "@/hooks/useHasSlot";
-import { UseInput, RefType, UseInputRef } from "@/types/UseFormTypes";
+import { UseInput } from "@/hooks/useForm";
 import { computed } from "vue";
 import ListIcon from "~icons/ic/sharp-do-not-disturb-on";
 
 const props = withDefaults(
-  defineProps<{
-    input: UseInput;
-    type?: string;
-    label?: string;
-    placeholder?: string;
-    showFirstError?: boolean;
-  }>(),
-  {
-    type: "text",
-    label: "",
-    placeholder: "",
-    showFirstError: false,
-  }
+    defineProps<{
+        name: string;
+        input: UseInput;
+        type?: string;
+        label?: string;
+        placeholder?: string;
+        showFirstError?: boolean;
+    }>(),
+    {
+        type: "text",
+        label: "",
+        placeholder: "",
+        showFirstError: false,
+    }
 );
 
-const hasSlot = useHasSlot();
-
-const errors = computed(() => {
-  if (!props.input.error?.length) {
-    return [];
-  }
-
-  if (props.showFirstError) {
-    return props.input.error?.slice(0, 1);
-  }
-  return props.input.error;
-});
-
 const stateProps = computed(() => {
-  return {
-    input: props.input,
-    type: props.type,
-    label: props.label,
-    placeholder: props.placeholder,
-    errors: errors,
-  };
+    return {
+        input: props.input,
+        type: props.type,
+        label: props.label,
+        placeholder: props.placeholder,
+    };
 });
-
-const inputRef = computed(() => props.input.ref as UseInputRef);
 </script>
 
 <template>
-  <div class="field">
-    <slot name="label" v-bind="stateProps">
-      <label class="field__label" v-if="label">{{ label }}</label>
-    </slot>
+    <div
+        class="field"
+        :class="{
+            'field--invalid': input.showError,
+            'field--dirty': input.dirty,
+        }"
+    >
+        <slot name="label" v-bind="stateProps">
+            <label class="field__label" v-if="label">{{ label }}</label>
+        </slot>
 
-    <slot name="input" v-bind="stateProps">
-      <input
-        :type="type"
-        v-model="input.value"
-        :placeholder="placeholder"
-        :ref="inputRef"
-        class="field__input"
-      />
-    </slot>
+        <slot name="input" v-bind="stateProps">
+            <input
+                :name="name"
+                :type="type"
+                v-model="input.value"
+                :placeholder="placeholder"
+                :ref="input.ref"
+                class="field__input"
+            />
+        </slot>
 
-    <div v-if="errors.length">
-      <slot name="errors" v-bind="stateProps">
-        <div
-          class="field__error text-red-700 mb-2 flex items-center gap-x-2"
-          v-for="(error, index) in errors"
-          :key="index"
-        >
-          <div>
-            <ListIcon />
-          </div>
-          <div>
-            {{ error }}
-          </div>
-        </div>
-      </slot>
+        <slot name="errors" v-bind="stateProps">
+            <div
+                v-if="input.showError"
+                class="field__error text-red-700 mb-2 flex items-center gap-x-2"
+            >
+                <div>
+                    <ListIcon />
+                </div>
+                <div>
+                    {{ input.error }}
+                </div>
+            </div>
+        </slot>
     </div>
-  </div>
 </template>
