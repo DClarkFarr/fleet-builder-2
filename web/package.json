@@ -11,6 +11,7 @@
   "dependencies": {
     "pinia": "^2.0.33",
     "vue": "^3.2.47",
+    "vue-hooks-form": "^0.3.0",
     "vue-router": "^4.1.6"
   },
   "devDependencies": {
