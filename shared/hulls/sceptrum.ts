@@ -11,6 +11,8 @@ const Sceptrum: Hull = {
 
     class: "battleship",
 
+    energy: 137,
+
     baseHp: 27936,
     baseArmor: 127,
     baseShield: 10868,

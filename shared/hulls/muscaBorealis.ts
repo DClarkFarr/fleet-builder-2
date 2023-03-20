@@ -1,63 +1,37 @@
 import { Hull } from "../types/Ship";
 
-const Tigris: Hull = {
-    name: "Tigris",
-    slug: "tigris",
+const muscaBorealis: Hull = {
+    name: "Musca Borealis",
+    slug: "musca-borealis",
 
     image: "",
 
     rarity: "legendary",
 
-    class: "battleship",
+    class: "cruiser",
 
-    energy: 137,
+    energy: 92,
 
-    baseHp: 22753,
-    baseArmor: 180,
-    baseShield: 18119,
+    baseHp: 23257,
+    baseArmor: 96,
+    baseShield: 8802,
 
-    engineSlot: "l",
+    engineSlot: "m",
 
-    weaponSlots: ["m", "l", "l", "l"],
-    armorSlots: ["s", "s", "m", "m", "l"],
-    unitSlots: ["s", "m", "m", "l"],
+    weaponSlots: ["s", "s", "m", "l", "l"],
+    armorSlots: ["m", "m", "l"],
+    unitSlots: ["s", "m", "l"],
 
     ability_1: [
         {
             location: "ability_1",
-            category: "damage",
-            type: "increase_weapon_damage",
-            variants: [],
+            category: "resistance",
+            type: "reduce_damage",
+            variants: ["hull"],
             amounts: [
                 {
                     type: "percent",
-                    value: 25,
-                },
-            ],
-            conditions: [],
-            damageType: [],
-            sizes: [],
-            durationType: null,
-            durationValue: 0,
-            repeatType: null,
-            repeatValue: 0,
-            notes: [],
-            appliesToFleet: false,
-            flagshipRequired: false,
-            boostClasses: [],
-            againstClasses: [],
-        },
-    ],
-    ability_2: [
-        {
-            location: "ability_2",
-            category: "armor",
-            type: "increase_armor",
-            variants: [],
-            amounts: [
-                {
-                    type: "percent",
-                    value: 28,
+                    value: 18,
                 },
             ],
             conditions: [],
@@ -69,9 +43,40 @@ const Tigris: Hull = {
             repeatValue: 0,
             notes: [
                 {
-                    category: "armor",
-                    text: "Stack armor",
+                    category: "resistance",
+                    text: "Stack resistance armor?",
                 },
+            ],
+            appliesToFleet: false,
+            flagshipRequired: false,
+            boostClasses: [],
+            againstClasses: [],
+        },
+    ],
+    ability_2: [
+        {
+            location: "ability_2",
+            category: "accuracy",
+            type: "increase_accuracy",
+            variants: [],
+            amounts: [
+                {
+                    type: "number",
+                    value: 720,
+                },
+            ],
+            conditions: [],
+            damageType: [],
+            sizes: [],
+            durationType: null,
+            durationValue: 0,
+            repeatType: null,
+            repeatValue: 0,
+            notes: [
+                // {
+                //     category: "armor",
+                //     text: "Stack armor",
+                // },
             ],
             appliesToFleet: false,
             flagshipRequired: false,
@@ -83,17 +88,17 @@ const Tigris: Hull = {
     flagship_ability: [
         {
             location: "flagship_ability",
-            category: "damage",
-            type: "increase_weapon_damage",
+            category: "movement",
+            type: "increase_ftl_speed",
             variants: [],
             amounts: [
                 {
                     type: "percent",
-                    value: 8,
+                    value: 12,
                 },
             ],
             conditions: [],
-            damageType: ["missile"],
+            damageType: [],
             sizes: [],
             durationType: null,
             durationValue: 0,
@@ -130,7 +135,12 @@ const Tigris: Hull = {
             durationValue: 0,
             repeatType: null,
             repeatValue: 0,
-            notes: [],
+            notes: [
+                {
+                    category: "armor",
+                    text: "Stack armor w/ HP+",
+                },
+            ],
             appliesToFleet: false,
             flagshipRequired: false,
             boostClasses: [],
@@ -146,38 +156,7 @@ const Tigris: Hull = {
             amounts: [
                 {
                     type: "percent",
-                    value: 45,
-                },
-            ],
-            conditions: [],
-            damageType: ["missile"],
-            sizes: [],
-            durationType: null,
-            durationValue: 0,
-            repeatType: null,
-            repeatValue: 0,
-            notes: [
-                {
-                    category: "damage",
-                    text: "Missile ship now",
-                },
-            ],
-            appliesToFleet: false,
-            flagshipRequired: false,
-            boostClasses: [],
-            againstClasses: [],
-        },
-    ],
-    chip_3: [
-        {
-            location: "chip_3",
-            category: "armor",
-            type: "increase_armor",
-            variants: [],
-            amounts: [
-                {
-                    type: "percent",
-                    value: 22,
+                    value: 35,
                 },
             ],
             conditions: [],
@@ -188,10 +167,41 @@ const Tigris: Hull = {
             repeatType: null,
             repeatValue: 0,
             notes: [
+                // {
+                //     category: "armor",
+                //     text: "Stack armor",
+                // },
+            ],
+            appliesToFleet: false,
+            flagshipRequired: false,
+            boostClasses: [],
+            againstClasses: [],
+        },
+    ],
+    chip_3: [
+        {
+            location: "chip_3",
+            category: "accuracy",
+            type: "increase_accuracy",
+            variants: [],
+            amounts: [
                 {
-                    category: "armor",
-                    text: "Stack armor",
+                    type: "number",
+                    value: 720,
                 },
+            ],
+            conditions: [],
+            damageType: [],
+            sizes: [],
+            durationType: null,
+            durationValue: 0,
+            repeatType: null,
+            repeatValue: 0,
+            notes: [
+                // {
+                //     category: "armor",
+                //     text: "Stack armor",
+                // },
             ],
             appliesToFleet: false,
             flagshipRequired: false,
@@ -202,8 +212,8 @@ const Tigris: Hull = {
     chip_4: [
         {
             location: "chip_4",
-            category: "damage",
-            type: "increase_armor",
+            category: "resistance",
+            type: "increase_resistance",
             variants: [],
             amounts: [
                 {
@@ -220,8 +230,8 @@ const Tigris: Hull = {
             repeatValue: 0,
             notes: [
                 {
-                    category: "armor",
-                    text: "Stack armor",
+                    category: "resistance",
+                    text: "Stack resistance armor",
                 },
             ],
             appliesToFleet: false,
@@ -233,13 +243,13 @@ const Tigris: Hull = {
     chip_5: [
         {
             location: "chip_5",
-            category: "shield",
-            type: "increase_shield",
+            category: "evade",
+            type: "increase_evade",
             variants: [],
             amounts: [
                 {
-                    type: "percent",
-                    value: 80,
+                    type: "number",
+                    value: 600,
                 },
             ],
             conditions: [],
@@ -250,10 +260,39 @@ const Tigris: Hull = {
             repeatType: null,
             repeatValue: 0,
             notes: [
+                // {
+                //     category: "armor",
+                //     text: "Stack armor",
+                // },
+            ],
+            appliesToFleet: false,
+            flagshipRequired: false,
+            boostClasses: [],
+            againstClasses: [],
+        },
+        {
+            location: "chip_5",
+            category: "accuracy",
+            type: "increase_accuracy",
+            variants: [],
+            amounts: [
                 {
-                    category: "shield",
-                    text: "Add some shields",
+                    type: "number",
+                    value: 600,
                 },
+            ],
+            conditions: [],
+            damageType: [],
+            sizes: [],
+            durationType: null,
+            durationValue: 0,
+            repeatType: null,
+            repeatValue: 0,
+            notes: [
+                // {
+                //     category: "armor",
+                //     text: "Stack armor",
+                // },
             ],
             appliesToFleet: false,
             flagshipRequired: false,
@@ -264,13 +303,13 @@ const Tigris: Hull = {
     chip_6: [
         {
             location: "chip_6",
-            category: "damage",
-            type: "increase_weapon_damage",
+            category: "resistance",
+            type: "increase_resistance",
             variants: [],
             amounts: [
                 {
                     type: "percent",
-                    value: 25,
+                    value: 17,
                 },
             ],
             conditions: [],
@@ -280,7 +319,12 @@ const Tigris: Hull = {
             durationValue: 0,
             repeatType: null,
             repeatValue: 0,
-            notes: [],
+            notes: [
+                // {
+                //     category: "armor",
+                //     text: "Stack armor",
+                // },
+            ],
             appliesToFleet: false,
             flagshipRequired: false,
             boostClasses: [],
@@ -289,4 +333,4 @@ const Tigris: Hull = {
     ],
 };
 
-export default Tigris;
+export default muscaBorealis;

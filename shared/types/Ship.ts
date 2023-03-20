@@ -56,6 +56,8 @@ export type Hull = {
     slug: string;
     image: string;
 
+    energy: number;
+
     rarity: ShipRarity;
     class: ShipClass;
 

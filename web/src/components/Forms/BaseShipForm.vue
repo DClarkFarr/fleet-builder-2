@@ -139,18 +139,31 @@ const handleShip1FormSubmit = () => {
                     We estimate the following base values for
                     {{ level.value }}
                 </p>
-                <p>
-                    Base HP:
-                    <b class="font-bold">{{ ship1BaseResults.baseHp }}</b>
-                </p>
-                <p>
-                    Base Shield:
-                    <b class="font-bold">{{ ship1BaseResults.baseShield }}</b>
-                </p>
-                <p>
-                    Base Armor:
-                    <b class="font-bold">{{ ship1BaseResults.baseArmor }}</b>
-                </p>
+                <div class="flex gap-x-6">
+                    <div class="grow">
+                        <p>
+                            Base HP:
+                            <b class="font-bold">{{
+                                ship1BaseResults.baseHp
+                            }}</b>
+                        </p>
+                        <p>
+                            Base Shield:
+                            <b class="font-bold">{{
+                                ship1BaseResults.baseShield
+                            }}</b>
+                        </p>
+                        <p>
+                            Base Armor:
+                            <b class="font-bold">{{
+                                ship1BaseResults.baseArmor
+                            }}</b>
+                        </p>
+                    </div>
+                    <div class="shrink">
+                        <pre><code>baseHp: {{ ship1BaseResults.baseHp }},<br />baseArmor: {{ ship1BaseResults.baseArmor }},<br />baseShield: {{ ship1BaseResults.baseShield }},</code></pre>
+                    </div>
+                </div>
             </div>
         </form>
     </div>
